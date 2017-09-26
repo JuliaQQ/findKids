@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/classes-f1c85de4182bb3d006d79cdf186738c789866180.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-f0c8ac09a4cfc19cd0921120113fc3fac7db445e.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/libs/fastjson-1.2.4.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fbcf8415e32859b473b336e5ac6422ee69b1185b">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/fastjson-1.2.4-28ba017ca19d5695d016ae011f46849e1e36a0d2.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/classes-061db1c33df928afaae15b8ef5ee30526e4d4f3e.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/libs/slf4j-api-1.7.14.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="862a5bc736005d68727d1387844d09d62efdb6cb">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/slf4j-api-1.7.14-3fbdfb2b72445b34cc1e6c8b3b0428ebe6610b3b.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/libs/AMap2DMap_4.2.0_AMapLocation_3.3.0_20170120.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aaa8c525a22beca4d7af07c8f79ae852cd6995f6">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/AMap2DMap_4.2.0_AMapLocation_3.3.0_20170120-36a136894266c52a280e8402ce39d7275cde3bcf.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/classes-149a6c34dc05c4abdddc8bdd4a7253ea34e3d88e.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/libs/mina-core-2.0.13.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fb85caac8ad0ac02355663a83722b97a3294f57">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/mina-core-2.0.13-7c6ca5cb4aa5efb44465e7956057247dc3bcdf11.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-613cbbb037a66a09768651979d5e723f7a4308a6.jar" />
+    </item>
+
+</items>
