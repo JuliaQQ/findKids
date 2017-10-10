@@ -36,16 +36,19 @@
         android:label="@string/app_name"
         android:sharedUserId="android.uid.system"
         android:theme="@style/AppTheme" >
-        <service android:name=".TService" >
+        <service android:name=".service.TService" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </service>
         <service android:name="com.amap.api.location.APSService"></service>
-        <service android:name=".FloatWindowService"></service>
+        <service android:name=".service.FloatWindowService"></service>
         <activity
-            android:name=".testService"
+            android:name=".activity.RegisterActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.testService"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <!--用于进行网络定位-->
