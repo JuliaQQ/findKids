@@ -6,8 +6,10 @@ package com.matio.constraints;
 public class Keys {
 
     public static final String USERID = "user_id";
+    public static final String PHONENUMBER = "phone_num";
     public static final String PASSWORD = "user_pwd";
     public static final String SESSIONID = "session_id";
+    public static final String VCODE = "vcode";
     public static final String USERNAME = "user_name";
     public static final String USERICON = "user_icon";
     public static final String USERLEVEL = "user_level";

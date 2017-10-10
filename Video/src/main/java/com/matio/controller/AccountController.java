@@ -43,28 +43,21 @@ public class AccountController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST , produces="text/json;charset=UTF-8")
     public String regist(
-            @RequestParam(Keys.USERNAME) String name,
+            @RequestParam(Keys.PHONENUMBER) String phone_num,
             @RequestParam(Keys.PASSWORD) String password,
-            @RequestParam(Keys.GENDER) String gender,
-            @RequestParam(Keys.BIRTHDAY) String birthday
+            @RequestParam(Keys.VCODE) String vcode
     ) throws IOException {
-        System.out.println(gender);
-        User user = userMapper.selectByUserName(name);
+
+        User user = userMapper.selectByUserPhoneNum(phone_num);
         JSONObject result ;
-        SimpleDateFormat birth_format = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(birthday);
         SimpleDateFormat dead_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (user == null){
             User new_user = new User();
 
-            try {
-                new_user.setUserBirth(birth_format.parse(birthday));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            new_user.setUserGender(Byte.valueOf(gender));
+            new_user.setPhoneNumber(phone_num);
             new_user.setUserPwd(password);
-            new_user.setUserName(name);
+            new_user.setUserName("匿名用户");
+
             new_user.setUserRegisterTime(new Date());
             new_user.setUserDetail("Say Nothing");
             new_user.setUserIcon("Default icon");
@@ -80,7 +73,7 @@ public class AccountController {
                 e.printStackTrace();
             }
 
-            Integer user_id = userMapper.selectByUserName(name).getUserId();
+            Integer user_id = userMapper.selectByUserPhoneNum(phone_num).getUserId();
 
             session.setUserId(user_id);
             String session_id = Tools.generateSessionId(15);
@@ -111,13 +104,13 @@ public class AccountController {
 
     @RequestMapping(value = "/log", method = RequestMethod.POST , produces="text/json;charset=UTF-8")
     public String login(
-            @RequestParam(Keys.USERNAME) String name,
+            @RequestParam(Keys.PHONENUMBER) String phone_num,
             @RequestParam(Keys.PASSWORD) String password
     ) throws IOException {
-        User user = userMapper.selectByUserName(name);
+        User user = userMapper.selectByUserPhoneNum(phone_num);
         JSONObject result ;
 
-        System.out.println(name+":"+password);
+        System.out.println(phone_num+":"+password);
 
         SimpleDateFormat dead_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -132,12 +125,12 @@ public class AccountController {
             }else {
                 String session_id ;
                 if (sessionMapper.selectByUserId(user.getUserId())==null){
-                    Session session = new GetSession(name, dead_format).invoke();
+                    Session session = new GetSession(phone_num, dead_format).invoke();
                     System.out.println("新session:"+session.getSessionId());
                     sessionMapper.insert(session);
                     session_id = session.getSessionId();
                 }else {
-                    Session session = new GetSession(name, dead_format).invoke();
+                    Session session = new GetSession(phone_num, dead_format).invoke();
                     System.out.println("新session:"+session.getSessionId());
                     sessionMapper.updateSession(session);
                     session_id = session.getSessionId();
@@ -197,12 +190,20 @@ public class AccountController {
     }
 
 
+    @RequestMapping(value = "/getvcode", method = RequestMethod.POST , produces="text/json;charset=UTF-8")
+    public String getVcode(
+            @RequestParam(Keys.PHONENUMBER) String phone_num
+    ) throws IOException {
+
+        return "";
+    }
+
     private class GetSession {
-        private String name;
+        private String phone_num;
         private SimpleDateFormat dead_format;
 
-        public GetSession(String name, SimpleDateFormat dead_format) {
-            this.name = name;
+        public GetSession(String phone_num, SimpleDateFormat dead_format) {
+            this.phone_num = phone_num;
             this.dead_format = dead_format;
         }
 
@@ -214,7 +215,7 @@ public class AccountController {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            session.setUserId(userMapper.selectByUserName(name).getUserId());
+            session.setUserId(userMapper.selectByUserPhoneNum(phone_num).getUserId());
             String session_id = Tools.generateSessionId(15);
             while (sessionMapper.selectBySession(session_id) != null) {
                 session_id = Tools.generateSessionId(15);

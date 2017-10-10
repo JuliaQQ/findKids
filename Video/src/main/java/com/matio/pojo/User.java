@@ -5,6 +5,8 @@ import java.util.Date;
 public class User {
     private Integer userId;
 
+    private String phoneNumber;
+
     private String userName;
 
     private String userPwd;
@@ -81,5 +83,13 @@ public class User {
 
     public void setUserRegisterTime(Date userRegisterTime) {
         this.userRegisterTime = userRegisterTime;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 }
