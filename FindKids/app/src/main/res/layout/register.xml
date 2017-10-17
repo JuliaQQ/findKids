@@ -18,7 +18,7 @@
         <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:id="@+id/back"
+            android:id="@+id/register_back"
             android:background="@drawable/back"
             style="?android:attr/borderlessButtonStyle"
             android:layout_gravity="left|bottom" />
@@ -78,7 +78,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/vcode"
+            android:id="@+id/register_vcode"
             android:layout_weight="1"
             android:hint="验证码"
             android:textColor="#ffffff"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发送验证码"
-            android:id="@+id/send_vcode"
+            android:id="@+id/register_send_vcode"
             android:background="@color/colorBackGreen"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="#ffffff" />

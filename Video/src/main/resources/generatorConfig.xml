@@ -16,8 +16,8 @@
     		<property name="suppressAllComments" value="true" /> 
 		</commentGenerator> 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/video" userId="root"
-			password="123456" />
+			connectionURL="jdbc:mysql://47.95.115.33:3306/findKids" userId="root"
+			password="79839921" />
 		<javaModelGenerator targetPackage="com.matio.pojo"
 			targetProject="src/main/java" />
 		<sqlMapGenerator targetPackage="com.matio.mapping"
@@ -49,9 +49,13 @@
 			   <!--enableCountByExample="false" enableUpdateByExample="false"-->
 			   <!--enableDeleteByExample="false" enableSelectByExample="false"-->
 			   <!--selectByExampleQueryId="false"></table>-->
-		<table tableName="session" domainObjectName="Session"
-		enableCountByExample="false" enableUpdateByExample="false"
-		enableDeleteByExample="false" enableSelectByExample="false"
-		selectByExampleQueryId="false"></table>
+		<!--<table tableName="session" domainObjectName="Session"-->
+		<!--enableCountByExample="false" enableUpdateByExample="false"-->
+		<!--enableDeleteByExample="false" enableSelectByExample="false"-->
+		<!--selectByExampleQueryId="false"></table>-->
+		<table tableName="vcode" domainObjectName="Vcode"
+			   enableCountByExample="false" enableUpdateByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   selectByExampleQueryId="false"></table>
 </context>
 </generatorConfiguration>

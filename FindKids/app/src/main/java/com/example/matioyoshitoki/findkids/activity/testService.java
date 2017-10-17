@@ -21,7 +21,7 @@ import org.apache.mina.transport.socket.nio.NioSocketConnector;
 
 import java.net.InetSocketAddress;
 
-import tools.Tools;
+import com.example.matioyoshitoki.findkids.Tools.Tools;
 
 
 public class testService extends AppCompatActivity {
@@ -77,6 +77,7 @@ public class testService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         Tools.translucentStatusBar(this, true);
 

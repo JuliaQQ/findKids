@@ -30,6 +30,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="CCP_REST_SMS_SDK_JAVA_v2.6.3r" level="project" />
     <orderEntry type="library" name="Maven: com.github.penggle:kaptcha:2.3.2" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235-1" level="project" />
@@ -97,6 +98,5 @@
     <orderEntry type="library" name="Maven: com.jfinal:jfinal:2.1" level="project" />
     <orderEntry type="library" name="Maven: cglib:cglib-nodep:3.1" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.20" level="project" />
-    <orderEntry type="library" name="CCP_REST_SMS_SDK_JAVA_v2.6.3r" level="project" />
   </component>
 </module>

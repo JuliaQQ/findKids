@@ -6,16 +6,30 @@ import java.util.HashMap;
 import java.util.Set;
 
 
-public class SDKTestSendTemplateSMS {
+public class SDKTestSendTemplateSMS extends Thread {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		HashMap<String, Object> result = null;
+	private String phone_num ;
+	private String vcode ;
+
+	public SDKTestSendTemplateSMS(String phone_num,String vcode){
+		this.phone_num = phone_num;
+		this.vcode = vcode;
+	}
+
+	@Override
+	public void run() {
+		super.run();
+		getVcode(phone_num);
+	}
+
+	private void getVcode(String phone_num) {
+
+		HashMap<String, Object> result ;
 
 		//初始化SDK
 		CCPRestSmsSDK restAPI = new CCPRestSmsSDK();
+
+
 		
 		//******************************注释*********************************************
 		//*初始化服务器地址和端口                                                       *
@@ -23,22 +37,22 @@ public class SDKTestSendTemplateSMS {
 		//*生产环境（用户应用上线使用）：restAPI.init("app.cloopen.com", "8883");       *
 		//*******************************************************************************
 		restAPI.init("app.cloopen.com", "8883");
+
 		
 		//******************************注释*********************************************
 		//*初始化主帐号和主帐号令牌,对应官网开发者主账号下的ACCOUNT SID和AUTH TOKEN     *
 		//*ACOUNT SID和AUTH TOKEN在登陆官网后，在“应用-管理控制台”中查看开发者主账号获取*
 		//*参数顺序：第一个参数是ACOUNT SID，第二个参数是AUTH TOKEN。                   *
 		//*******************************************************************************
-		restAPI.setAccount("", "");
-		
+		restAPI.setAccount("aaf98f8950a880510150a8b2ebba00e7", "1716e73f6e994446bb57e08def74ed9e");
+
 		
 		//******************************注释*********************************************
 		//*初始化应用ID                                                                 *
 		//*测试开发可使用“测试Demo”的APP ID，正式上线需要使用自己创建的应用的App ID     *
 		//*应用ID的获取：登陆官网，在“应用-应用列表”，点击应用名称，看应用详情获取APP ID*
 		//*******************************************************************************
-		restAPI.setAppId("");
-		
+		restAPI.setAppId("8aaf07085ea24877015ec67d3d890c8f");
 		
 		//******************************注释****************************************************************
 		//*调用发送模板短信的接口发送短信                                                                  *
@@ -54,7 +68,7 @@ public class SDKTestSendTemplateSMS {
 		//*result = restAPI.sendTemplateSMS("13800000000","1" ,new String[]{"6532","5"});																		  *
 		//*则13800000000手机号收到的短信内容是：【云通讯】您使用的是云通讯短信模板，您的验证码是6532，请于5分钟内正确输入     *
 		//*********************************************************************************************************************
-		result = restAPI.sendTemplateSMS("","" ,new String[]{"",""});
+		result = restAPI.sendTemplateSMS(phone_num,"1" ,new String[]{vcode,"3"});
 		
 		System.out.println("SDKTestGetSubAccounts result=" + result);
 		if("000000".equals(result.get("statusCode"))){

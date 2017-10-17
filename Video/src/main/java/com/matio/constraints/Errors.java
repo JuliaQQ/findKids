@@ -4,6 +4,7 @@ public class Errors {
 
 	// regist
 	public static final String NAME_DUPLICATE = "该用户已注册";
+	public static final String WRONG_VCODE = "验证码错误";
 
 	// login
 	public static final String NO_SUCH_NAME = "该用户不存在";

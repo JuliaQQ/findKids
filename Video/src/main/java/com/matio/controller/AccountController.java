@@ -3,14 +3,9 @@ package com.matio.controller;
 import com.matio.constraints.DefaultValue;
 import com.matio.constraints.Errors;
 import com.matio.constraints.Keys;
-import com.matio.mapping.SessionMapper;
-import com.matio.mapping.UserMapper;
-import com.matio.mapping.User_authorityMapper;
-import com.matio.mapping.User_levelMapper;
-import com.matio.pojo.Session;
-import com.matio.pojo.User;
-import com.matio.pojo.User_authority;
-import com.matio.pojo.User_level;
+import com.matio.mapping.*;
+import com.matio.pojo.*;
+import com.matio.tools.SDKTestSendTemplateSMS;
 import com.matio.tools.Tools;
 import com.matio.unit.JsonUtil;
 import org.json.JSONObject;
@@ -23,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by matioyoshitoki on 2017/8/29.
@@ -40,6 +38,9 @@ public class AccountController {
     private User_levelMapper user_levelMapper;
     @Autowired
     private User_authorityMapper user_authorityMapper;
+    @Autowired
+    private VcodeMapper vcodeMapper;
+
 
     @RequestMapping(value = "/reg", method = RequestMethod.POST , produces="text/json;charset=UTF-8")
     public String regist(
@@ -48,53 +49,62 @@ public class AccountController {
             @RequestParam(Keys.VCODE) String vcode
     ) throws IOException {
 
+        System.out.println("战斗开始");
+
         User user = userMapper.selectByUserPhoneNum(phone_num);
+        System.out.println(user);
+        Vcode check_vcode = vcodeMapper.selectByPrimaryKey(phone_num);
+        System.out.println(check_vcode);
         JSONObject result ;
         SimpleDateFormat dead_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         if (user == null){
-            User new_user = new User();
+            if (check_vcode == null || !check_vcode.getVcode().equals(vcode)){
+                result = JsonUtil.fromErrors(Errors.WRONG_VCODE);
+            }else {
 
-            new_user.setPhoneNumber(phone_num);
-            new_user.setUserPwd(password);
-            new_user.setUserName("匿名用户");
+                User new_user = new User();
 
-            new_user.setUserRegisterTime(new Date());
-            new_user.setUserDetail("Say Nothing");
-            new_user.setUserIcon("Default icon");
-            userMapper.insert(new_user);
+                new_user.setPhoneNumber(phone_num);
+                new_user.setUserPwd(password);
+                new_user.setUserName("匿名用户");
+
+                new_user.setUserRegisterTime(new Date());
+                new_user.setUserDetail("Say Nothing");
+                new_user.setUserIcon("Default icon");
+                userMapper.insert(new_user);
 
 
+                Session session = new Session();
+                try {
+                    Date dead_time = dead_format.parse(Tools.getSomeDayBefore(dead_format.format(new Date()), -7));
+                    session.setDeadTime(dead_time);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
-            Session session = new Session();
-            try {
-                Date dead_time = dead_format.parse(Tools.getSomeDayBefore(dead_format.format(new Date()),-7));
-                session.setDeadTime(dead_time);
-            } catch (ParseException e) {
-                e.printStackTrace();
+                Integer user_id = userMapper.selectByUserPhoneNum(phone_num).getUserId();
+
+                session.setUserId(user_id);
+                String session_id = Tools.generateSessionId(15);
+                while (sessionMapper.selectBySession(session_id) != null) {
+                    session_id = Tools.generateSessionId(15);
+                }
+                session.setSessionId(session_id);
+                sessionMapper.insert(session);
+
+                User_level user_level = new User_level();
+                user_level.setUserId(user_id);
+                user_level.setUserLevel(DefaultValue.DEFAULT_LEVEL);
+                user_levelMapper.insert(user_level);
+
+                User_authority user_authority = new User_authority();
+                user_authority.setUserId(user_id);
+                user_authority.setUserAuthority(DefaultValue.DEFAULT_AUTHORITY);
+                user_authorityMapper.insert(user_authority);
+
+                result = JsonUtil.fromErrors(Errors.SUCCESS);
+                result.put(Keys.SESSIONID, session_id);
             }
-
-            Integer user_id = userMapper.selectByUserPhoneNum(phone_num).getUserId();
-
-            session.setUserId(user_id);
-            String session_id = Tools.generateSessionId(15);
-            while (sessionMapper.selectBySession(session_id) != null){
-                session_id = Tools.generateSessionId(15);
-            }
-            session.setSessionId(session_id);
-            sessionMapper.insert(session);
-
-            User_level user_level = new User_level();
-            user_level.setUserId(user_id);
-            user_level.setUserLevel(DefaultValue.DEFAULT_LEVEL);
-            user_levelMapper.insert(user_level);
-
-            User_authority user_authority = new User_authority();
-            user_authority.setUserId(user_id);
-            user_authority.setUserAuthority(DefaultValue.DEFAULT_AUTHORITY);
-            user_authorityMapper.insert(user_authority);
-
-            result = JsonUtil.fromErrors(Errors.SUCCESS);
-            result.put(Keys.SESSIONID,session_id);
         }else {
             result = JsonUtil.fromErrors(Errors.NAME_DUPLICATE);
         }
@@ -195,7 +205,33 @@ public class AccountController {
             @RequestParam(Keys.PHONENUMBER) String phone_num
     ) throws IOException {
 
-        return "";
+        String vcode = Tools.getRandomVcode();
+        SimpleDateFormat simple_date_format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        new SDKTestSendTemplateSMS(phone_num,vcode).start();
+
+        Vcode vcode_s = new Vcode();
+        vcode_s.setPhoneNum(phone_num);
+        vcode_s.setVcode(vcode);
+        try {
+            System.out.println(Tools.getSomeMinLate(simple_date_format.format(new Date()),-5));
+            vcode_s.setDeadTime(simple_date_format.parse(Tools.getSomeMinLate(simple_date_format.format(new Date()),-5)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+//        long begin = System.currentTimeMillis();
+//        System.out.println("开始耗时计算");
+        Vcode rst = vcodeMapper.selectByPrimaryKey(phone_num);
+//        System.out.println("耗时:"+(System.currentTimeMillis()-begin));
+        if (rst == null){
+
+            vcodeMapper.insert(vcode_s);
+
+        }else {
+
+            vcodeMapper.updateByPrimaryKey(vcode_s);
+
+        }
+        return JsonUtil.fromErrors(Errors.SUCCESS).toString();
     }
 
     private class GetSession {

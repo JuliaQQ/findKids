@@ -16,4 +16,6 @@ public class Keys {
     public static final String USERAUTHORITY = "user_authority";
     public static final String GENDER = "gender";
     public static final String BIRTHDAY = "birthday";
+
+    public static final String REDIS_KEY_VCODE = "vcode";
 }

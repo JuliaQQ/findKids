@@ -1,24 +1,45 @@
 package com.example.matioyoshitoki.findkids.http;
 
+import android.util.Log;
+
+import com.example.matioyoshitoki.findkids.constraints.Keys;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by matioyoshitoki on 2017/10/10.
  */
 public class GetAndPost {
 
-    public static String executeHttpGet() {
+    public static void main(String[]args){
+        ArrayList<String> sss = new ArrayList<>();
+        sss.add(Keys.PHONENUMBER+"=18969899383");
+        GetAndPost.executeHttpPost("http://47.95.115.33:8080/getvcode",sss);
+    }
+
+    public static String executeHttpGet(String url_str,ArrayList<String> ps) {
         String result = null;
         URL url = null;
         HttpURLConnection connection = null;
         InputStreamReader in = null;
         try {
-            url = new URL("http://47.95.115.33:8080/data/get/?token=alexzhou");
+            if (ps.size()>0) {
+                url_str += "?" + ps.get(0)+"&";
+                if (ps.size()>1) {
+                    for (int i = 1; i < ps.size(); i++) {
+                        url_str += ps.get(i)+"&";
+                    }
+                }
+            }
+            url_str = url_str.substring(0,url_str.length()-1);
+            url = new URL(url_str);
             connection = (HttpURLConnection) url.openConnection();
             in = new InputStreamReader(connection.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(in);
@@ -46,33 +67,42 @@ public class GetAndPost {
         return result;
     }
 
-    public static String executeHttpPost() {
+    public static String executeHttpPost(String url_str,ArrayList<String> ps) {
         String result = null;
         URL url = null;
         HttpURLConnection connection = null;
         InputStreamReader in = null;
         try {
-            url = new URL("http://47.95.115.33:8080/data/post/");
+            url = new URL(url_str);
             connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             connection.setRequestProperty("Charset", "utf-8");
-            DataOutputStream dop = new DataOutputStream(
-                    connection.getOutputStream());
-            dop.writeBytes("token=alexzhou");
+            DataOutputStream dop = new DataOutputStream(connection.getOutputStream());
+            String buff = "?";
+            for (int i=0;i<ps.size()-1;i++){
+                dop.writeBytes(ps.get(i)+"&");
+            }
+            dop.writeBytes(ps.get(ps.size() - 1));
             dop.flush();
             dop.close();
 
-            in = new InputStreamReader(connection.getInputStream());
-            BufferedReader bufferedReader = new BufferedReader(in);
-            StringBuffer strBuffer = new StringBuffer();
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                strBuffer.append(line);
+            System.out.println(connection.getResponseCode());
+            if(connection.getResponseCode() == 200){
+
+                in = new InputStreamReader(connection.getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(in);
+                StringBuffer strBuffer = new StringBuffer();
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
+                    strBuffer.append(line);
+                }
+                result = strBuffer.toString();
+
             }
-            result = strBuffer.toString();
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -26,6 +26,12 @@
     from user
     where user_name = #{user_name,jdbcType=VARCHAR}
   </select>
+  <select id="selectByUserPhoneNum" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where phoneNumber = #{phone_num,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}

@@ -9,6 +9,17 @@ import java.util.UUID;
  * Created by matioyoshitoki on 2017/8/3.
  */
 public class Tools {
+
+    public static String getSomeMinLate(String now,int min) throws ParseException {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        calendar.setTime(df.parse(now));
+        calendar.set(Calendar.MINUTE, calendar.get(Calendar.MINUTE) - min);
+        return df.format(calendar.getTime());
+    }
+
+
+
     public static String getSomeDayBefore(String now,int days) throws ParseException {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -44,4 +55,11 @@ public class Tools {
 
         return sessionId.substring(0,length);
     }
+
+
+    public static String getRandomVcode(){
+        int vcode = (int)(1000d+Math.random()*8999d);
+        return ""+vcode;
+    }
+
 }
