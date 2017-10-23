@@ -92,8 +92,8 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="mina-core-2.0.13" level="project" />
-    <orderEntry type="library" exported="" name="slf4j-api-1.7.14" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.4" level="project" />
+    <orderEntry type="library" exported="" name="slf4j-api-1.7.14" level="project" />
     <orderEntry type="library" exported="" name="AMap2DMap_4.2.0_AMapLocation_3.3.0_20170120" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="design-23.0.1" level="project" />

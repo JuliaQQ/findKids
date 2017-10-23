@@ -1,5 +1,6 @@
 package com.example.matioyoshitoki.findkids.activity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.matioyoshitoki.findkids.Tools.Dialog_loading;
 import com.example.matioyoshitoki.findkids.socket.MinaClientHandler;
 import com.example.matioyoshitoki.findkids.R;
 import com.example.matioyoshitoki.findkids.service.TService;
@@ -80,6 +82,7 @@ public class testService extends AppCompatActivity {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
         Tools.translucentStatusBar(this, true);
+
 
         login_btn = (Button)findViewById(R.id.login_btn);
         phone_num = (EditText)findViewById(R.id.login_phoneNum);

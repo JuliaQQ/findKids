@@ -64,7 +64,8 @@
         android:layout_alignEnd="@+id/regist_phone"
         android:textColorHint="#dddddd"
         android:hint="密码"
-        android:background="@drawable/writh_line" />
+        android:background="@drawable/writh_line"
+        android:textColor="#ffffff" />
 
     <LinearLayout
         android:orientation="horizontal"

@@ -1,5 +1,6 @@
 package com.example.matioyoshitoki.findkids.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.matioyoshitoki.findkids.R;
 import com.example.matioyoshitoki.findkids.Tools.AccountValidatorUtil;
+import com.example.matioyoshitoki.findkids.Tools.Dialog_loading;
 import com.example.matioyoshitoki.findkids.http.GetVcode_Thread;
 import com.example.matioyoshitoki.findkids.Tools.Timer_changeButton;
 
@@ -30,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText phone_num ;
     EditText vcode ;
     EditText password ;
+
+    Dialog dialog;
 
 
 
@@ -113,12 +117,15 @@ public class RegisterActivity extends AppCompatActivity {
                 return;
             }
             if (AccountValidatorUtil.isMobile(phone_num.getText().toString())){
-                Register_Thread register_thread = new Register_Thread(phone_num.getText().toString(),password.getText().toString(),vcode.getText().toString());
+                Register_Thread register_thread = new Register_Thread(phone_num.getText().toString(),password.getText().toString(),vcode.getText().toString(),mHandler);
                 register_thread.start();
             }else {
                 Toast toast = Toast.makeText(RegisterActivity.this, "手机号格式错误", Toast.LENGTH_SHORT);
                 toast.show();
             }
+            dialog = Dialog_loading.createLoadingDialog(RegisterActivity.this, "注册中...");
+
+
         }
     };
 
@@ -141,6 +148,13 @@ public class RegisterActivity extends AppCompatActivity {
                     }
 
                     break;
+                case 1:
+                    dialog.cancel();
+                    Toast toast = Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT);
+                    toast.show();
+                    Intent intent = new Intent(RegisterActivity.this,testService.class);
+                    startActivity(intent);
+                    RegisterActivity.this.finish();
                 default:
                     break;
             }

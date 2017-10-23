@@ -39,10 +39,10 @@
   <insert id="insert" parameterType="com.matio.pojo.User" >
     insert into user (user_name, user_pwd,
       user_icon, user_birth, user_gender, 
-      user_detail, user_register_time)
+      user_detail, user_register_time,phoneNumber)
     values ( #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR},
       #{userIcon,jdbcType=VARCHAR}, #{userBirth,jdbcType=TIMESTAMP}, #{userGender,jdbcType=TINYINT}, 
-      #{userDetail,jdbcType=VARCHAR}, #{userRegisterTime,jdbcType=TIMESTAMP})
+      #{userDetail,jdbcType=VARCHAR}, #{userRegisterTime,jdbcType=TIMESTAMP},#{phoneNumber,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.matio.pojo.User" >
     insert into user

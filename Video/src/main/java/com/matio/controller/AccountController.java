@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,6 +73,7 @@ public class AccountController {
                 new_user.setUserRegisterTime(new Date());
                 new_user.setUserDetail("Say Nothing");
                 new_user.setUserIcon("Default icon");
+
                 userMapper.insert(new_user);
 
 
@@ -232,6 +235,22 @@ public class AccountController {
 
         }
         return JsonUtil.fromErrors(Errors.SUCCESS).toString();
+    }
+
+    @RequestMapping(value = "/Gumball", method = RequestMethod.GET, produces="text/json;charset=UTF-8")
+    public String gumball() throws IOException {
+        Process p = Runtime.getRuntime().exec("/Gumball/work.sh");
+        InputStreamReader ir=new InputStreamReader(p.getInputStream());
+        LineNumberReader input = new LineNumberReader (ir);
+
+        String line;
+        StringBuffer result = new StringBuffer();
+        while ((line = input.readLine ()) != null){
+            result.append(line+"\n");
+        }
+        com.alibaba.fastjson.JSONObject jsonObject = com.alibaba.fastjson.JSONObject.parseObject(result.toString());
+
+        return jsonObject.getString("message").replace("[\"","").replace("\"]","");
     }
 
     private class GetSession {
