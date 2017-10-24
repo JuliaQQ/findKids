@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.example.matioyoshitoki.findkids.R;
 import com.example.matioyoshitoki.findkids.service.TService;
-import com.example.matioyoshitoki.findkids.activity.testService;
+import com.example.matioyoshitoki.findkids.activity.LoginActivity;
 
 import java.lang.reflect.Field;
 
@@ -48,8 +48,8 @@ public class FloatWindowSmallView extends LinearLayout {
 
 //    @Override
 //    public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-//        Intent i = new Intent(testService.ctx,TService.class);
-//        testService.ctx.startService(i);
+//        Intent i = new Intent(LoginActivity.ctx,TService.class);
+//        LoginActivity.ctx.startService(i);
 //        return super.onKeyLongPress(keyCode, event);
 //    }
     long downTime = 0;
@@ -78,8 +78,8 @@ public class FloatWindowSmallView extends LinearLayout {
                 upTime = event.getEventTime();
                 Log.i("时间变化",""+downTime+":"+upTime);
                 if (upTime-downTime > 1000){
-                    Intent i = new Intent(testService.ctx,TService.class);
-                    testService.ctx.startService(i);
+                    Intent i = new Intent(LoginActivity.ctx,TService.class);
+                    LoginActivity.ctx.startService(i);
                     downTime = 0;
                     upTime = 0;
                 }
@@ -88,8 +88,8 @@ public class FloatWindowSmallView extends LinearLayout {
             case MotionEvent.ACTION_BUTTON_PRESS:
                 long time = event.getEventTime();
                 if (time>1000){
-                    Intent i = new Intent(testService.ctx,TService.class);
-                    testService.ctx.startService(i);
+                    Intent i = new Intent(LoginActivity.ctx,TService.class);
+                    LoginActivity.ctx.startService(i);
                 }else {
                     Log.i("时间不够",""+time);
                 }

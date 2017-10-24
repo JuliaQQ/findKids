@@ -2,9 +2,11 @@ package com.example.matioyoshitoki.findkids.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +35,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText vcode ;
     EditText password ;
 
+    private SharedPreferences sPref ;
+
     Dialog dialog;
 
 
@@ -43,6 +47,8 @@ public class RegisterActivity extends AppCompatActivity {
 //        getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);
         setContentView(R.layout.register);
         Tools.translucentStatusBar(this, true);
+
+        sPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         back = (Button)findViewById(R.id.register_back);
         getVcode_btn = (Button)findViewById(R.id.register_send_vcode);
@@ -62,7 +68,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button.OnClickListener back_listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent main_view = new Intent(RegisterActivity.this,testService.class);
+            Intent main_view = new Intent(RegisterActivity.this,LoginActivity.class);
             startActivity(main_view);
             RegisterActivity.this.finish();
         }
@@ -150,9 +156,11 @@ public class RegisterActivity extends AppCompatActivity {
                     break;
                 case 1:
                     dialog.cancel();
+
+                    sPref.edit().putString("session_id", (String)msg.obj).commit();
                     Toast toast = Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT);
                     toast.show();
-                    Intent intent = new Intent(RegisterActivity.this,testService.class);
+                    Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                     startActivity(intent);
                     RegisterActivity.this.finish();
                 default:

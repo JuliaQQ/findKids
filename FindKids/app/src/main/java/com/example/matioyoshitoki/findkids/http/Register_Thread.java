@@ -18,7 +18,7 @@ public class Register_Thread extends Thread{
     String phone_num;
     String password ;
     String vcode ;
-    private SharedPreferences sPref;
+    private SharedPreferences sPref ;
     Handler mHandler ;
 
 
@@ -38,8 +38,10 @@ public class Register_Thread extends Thread{
         ps.add(Keys.VCODE + "=" + vcode);
         JSONObject result = JSONObject.parseObject(GetAndPost.executeHttpPost("http://47.95.115.33:8080/reg", ps));
         if (result.getString(Keys.STATUS).equals(AllConts.SUCCESS)){
-            sPref.edit().putString("session_id",result.getString(Keys.SESSIONID));
-            mHandler.sendEmptyMessage(1);
+            Message msg = new Message();
+            msg.what = 1;
+            msg.obj = result.getString(Keys.SESSIONID);
+            mHandler.sendMessage(msg);
         }else {
             mHandler.sendEmptyMessage(1);
         }

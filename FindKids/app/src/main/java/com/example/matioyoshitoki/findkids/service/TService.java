@@ -190,7 +190,7 @@ public class TService extends Service {
 ////        Notification notification = new Notification(R.drawable.icon,
 ////                "SERVICE START", System.currentTimeMillis());
 //
-//        Intent intent = new Intent(this, testService.class);
+//        Intent intent = new Intent(this, LoginActivity.class);
 //        intent.putExtra("FLG", 1);
 //        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
 //                intent, 0);

@@ -153,6 +153,7 @@ public class AccountController {
                 User_authority user_authority = user_authorityMapper.selectByPrimaryKey(user.getUserId());
 
                 result = JsonUtil.fromErrors(Errors.SUCCESS);
+                result.put(Keys.USERNAME,user.getUserName());
                 result.put(Keys.USERICON,user.getUserIcon());
                 result.put(Keys.USERAUTHORITY,user_authority.getUserAuthority());
                 result.put(Keys.USERLEVEL,user_level.getUserLevel());
@@ -196,6 +197,28 @@ public class AccountController {
                 result.put(Keys.USERAUTHORITY, user_authority.getUserAuthority());
                 result.put(Keys.USERLEVEL, user_level.getUserLevel());
             }
+
+        }
+        System.out.println(result.toString());
+        return result.toString();
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.POST , produces="text/json;charset=UTF-8")
+    public String logout(
+            @RequestParam(Keys.SESSIONID) String session_id
+    ) throws IOException {
+        System.out.println(session_id);
+        Session user_session = sessionMapper.selectBySession(session_id);
+        JSONObject result ;
+//        System.out.println(user_session.getUserId());
+
+        if (user_session == null){
+            System.out.println("session不存在");
+            result = JsonUtil.fromErrors(Errors.SESSION_DEAD);
+
+        }else {
+            sessionMapper.deleteBySession(session_id);
+            result = JsonUtil.fromErrors(Errors.SUCCESS);
 
         }
         System.out.println(result.toString());
