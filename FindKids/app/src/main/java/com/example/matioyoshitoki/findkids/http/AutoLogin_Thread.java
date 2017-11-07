@@ -2,6 +2,7 @@ package com.example.matioyoshitoki.findkids.http;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.matioyoshitoki.findkids.Tools.AllConts;
@@ -26,23 +27,31 @@ public class AutoLogin_Thread extends Thread {
     public void run() {
         super.run();
         ArrayList<String> ps = new ArrayList<>();
-        ps.add(Keys.SESSIONID+ "=" + session_id);
+        ps.add(Keys.SESSIONID + "=" + session_id);
+        System.out.println("获取session:"+session_id);
         JSONObject result = JSONObject.parseObject(GetAndPost.executeHttpPost("http://47.95.115.33:8080/autoLog", ps));
 
         System.out.println(result);
-        switch (result.getString(Keys.STATUS)){
-            case AllConts.SUCCESS :
-                Message msg = new Message();
-                msg.what = 1;
-                result.put(Keys.SESSIONID,session_id);
-                msg.obj = result;
-                mHandler.sendMessage(msg);
-                break;
-            case AllConts.FAILD:
-                Message msg_faild = new Message();
-                msg_faild.what = 2;
-                msg_faild.obj = result.getString(Keys.INFO);
-                break;
+        if (result == null){
+            Message msg_faild = new Message();
+            msg_faild.what = 2;
+            msg_faild.obj = result.getString("网络连接失败");
+        }else {
+            switch (result.getString(Keys.STATUS)) {
+                case AllConts.SUCCESS:
+                    Message msg = new Message();
+                    msg.what = 1;
+                    result.put(Keys.SESSIONID, session_id);
+                    msg.obj = result;
+                    mHandler.sendMessage(msg);
+                    break;
+                case AllConts.FAILD:
+                    Message msg_faild = new Message();
+                    msg_faild.what = 2;
+                    msg_faild.obj = result.getString(Keys.INFO);
+                    mHandler.sendMessage(msg_faild);
+                    break;
+            }
         }
     }
 }

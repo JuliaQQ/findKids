@@ -88,6 +88,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     };
 
+    /*
+    * 目前登录功能存在bug，bug为服务端无法正确更新session导致自动登录出错
+    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         sPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         if (!sPref.getString(Keys.SESSIONID,"").equals("")){
+
             AutoLogin_Thread autoLogin_thread = new AutoLogin_Thread(sPref.getString(Keys.SESSIONID,""),mHandler);
             autoLogin_thread.start();
             dialog = Dialog_loading.createLoadingDialog(LoginActivity.this, "登录中...");
@@ -183,16 +187,18 @@ public class LoginActivity extends AppCompatActivity {
                 case 1:
                     dialog.cancel();
                     JSONObject result = (JSONObject)msg.obj;
-                    sPref.edit().putString("session_id", result.getString(Keys.SESSIONID)).commit();
-                    sPref.edit().putString("user_name", result.getString(Keys.USERNAME)).commit();
-                    sPref.edit().putString("user_authority", result.getString(Keys.USERAUTHORITY)).commit();
-                    sPref.edit().putString("user_icon", result.getString(Keys.USERICON)).commit();
-                    sPref.edit().putString("user_level",result.getString(Keys.USERLEVEL)).commit();
-                    Intent intent = new Intent(LoginActivity.this,MapActivity.class);
+                    Log.i("保存session_id",result.getString(Keys.SESSIONID));
+                    sPref.edit().putString(Keys.SESSIONID, result.getString(Keys.SESSIONID)).commit();
+                    sPref.edit().putString(Keys.USERNAME, result.getString(Keys.USERNAME)).commit();
+                    sPref.edit().putString(Keys.USERAUTHORITY, result.getString(Keys.USERAUTHORITY)).commit();
+                    sPref.edit().putString(Keys.USERICON, result.getString(Keys.USERICON)).commit();
+                    sPref.edit().putString(Keys.USERLEVEL, result.getString(Keys.USERLEVEL)).commit();
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     LoginActivity.this.finish();
                     break;
                 case 2:
+                    Log.i("失败","失败中～～～～");
                     dialog.cancel();
                     Toast toast = Toast.makeText(LoginActivity.this, (String)msg.obj, Toast.LENGTH_SHORT);
                     toast.show();

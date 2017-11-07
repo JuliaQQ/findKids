@@ -78,6 +78,8 @@ public class TService extends Service {
                 if (index < 10) {
 //                    Log.i("蓄力中",""+index);
 
+
+
                     String lat = ""+aMapLocation.getLatitude();
                     String lo = ""+aMapLocation.getLongitude();
                     String spd = ""+aMapLocation.getSpeed();

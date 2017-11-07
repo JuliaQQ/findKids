@@ -45,6 +45,7 @@ public class Login_Thread extends Thread {
                 Message msg_faild = new Message();
                 msg_faild.what = 2;
                 msg_faild.obj = result.getString(Keys.INFO);
+                mHandler.sendMessage(msg_faild);
                 break;
         }
     }

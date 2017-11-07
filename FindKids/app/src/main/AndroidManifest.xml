@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.MapActivity"
+            android:name=".activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
