@@ -3,7 +3,6 @@ package com.example.matioyoshitoki.findkids.socket;
 import android.os.Message;
 import android.util.Log;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.matioyoshitoki.findkids.Tools.AllConts;
 import com.example.matioyoshitoki.findkids.Tools.All_Handle;
@@ -65,7 +64,6 @@ public class MinaClientHandler extends IoHandlerAdapter {
                 All_Handle.send_location.sendMessage(msg);
             }
         }
-
         System.out.println("服务器返回的数据：" + message.toString());
     }
 
