@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
             chain.addLast("myChin", new ProtocolCodecFilter(new TextLineCodecFactory()));
 
             //客户端的消息处理器：一个SamplMinaServerHander对象
-            connector.setHandler(new MinaClientHandler());
+            connector.setHandler(new MinaClientHandler(sPref.getString(Keys.PHONENUMBER,"")));
 
             //连接到服务器：
             ConnectFuture cf = connector.connect(new InetSocketAddress("47.95.115.33",10000));
@@ -124,9 +124,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        System.out.println("测测测测实"+sPref.getString(Keys.SESSIONID, ""));
+        System.out.println("测测测测实" + sPref.getString(Keys.SESSIONID, ""));
         login_btn.setOnClickListener(login_listener);
-        (new Thread(networkTask)).start();
+
 
 
         //声明AMapLocationClient类对象
@@ -196,6 +196,7 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                     LoginActivity.this.finish();
+                    (new Thread(networkTask)).start();
                     break;
                 case 2:
                     Log.i("失败","失败中～～～～");
