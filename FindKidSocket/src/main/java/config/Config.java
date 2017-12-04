@@ -1,6 +1,7 @@
 package config;
 
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 
 import java.io.File;
@@ -9,6 +10,10 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.util.Properties;
 
+import model.Gps_msg;
+import model.Gps_receive;
+import model.Gps_tmp;
+import model.Protect;
 import org.apache.log4j.Logger;
 
 /**
@@ -44,13 +49,14 @@ public class Config {
                 Integer.valueOf(p.getProperty("maxActive")));
         dp.setRemoveAbandonedTimeoutMillis(6 * 1000);
 
-        AutoTableBindPlugin atbp = new AutoTableBindPlugin(dp);
-        atbp.autoScan(false);
-        atbp.addScanPackages("model");
-        atbp.setShowSql(false);
+        ActiveRecordPlugin arp = new ActiveRecordPlugin(dp);
+        arp.addMapping("gps_tmp", Gps_tmp.class);
+        arp.addMapping("gps_msg", Gps_msg.class);
+        arp.addMapping("gps_receive", Gps_receive.class);
+        arp.addMapping("protect", Protect.class);
 
         dp.start();
-        atbp.start();
+        arp.start();
 
         logger.warn("finish initDB()");
     }
