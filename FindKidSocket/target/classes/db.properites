@@ -1,6 +1,6 @@
-db=jdbc:mysql://localhost:3306/news?useSSL=true&verifyServerCertificate=false&characterEncoding=utf-8
+db=jdbc:mysql://47.95.115.33:3306/news?useSSL=true&verifyServerCertificate=false&characterEncoding=utf-8
 user=root
-password=dfdfdfdfd
+password=79839921
 
 initialSize=200
 minIdle=100

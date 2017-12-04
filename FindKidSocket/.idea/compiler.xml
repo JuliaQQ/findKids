@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="FindKidSocket" />
         <module name="PufaSocket" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="FindKidSocket" target="1.8" />
       <module name="PufaSocket" target="1.8" />
     </bytecodeTargetLevel>
   </component>

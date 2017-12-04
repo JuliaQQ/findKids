@@ -16,11 +16,11 @@ public class Entry {
 
 //	 
 	 public static void main(String[] args) {
-//		 try {
-//			 new Config().initAll();
-//		 } catch (IOException e) {
-//			 e.printStackTrace();
-//		 }
+		 try {
+			 new Config().initAll();
+		 } catch (IOException e) {
+			 e.printStackTrace();
+		 }
 		 IoAcceptor acceptor=new NioSocketAcceptor();
 		 acceptor.getSessionConfig().setReadBufferSize(16);
 		 acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE,10);//读写通道在10秒内无任何操作进入空闲状态
