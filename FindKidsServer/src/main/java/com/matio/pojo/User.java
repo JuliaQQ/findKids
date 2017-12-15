@@ -19,8 +19,18 @@ public class User {
 
     private Date userRegisterTime;
 
+    private String phoneNumber;
+
     public Integer getUserId() {
         return userId;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public void setUserId(Integer userId) {

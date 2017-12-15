@@ -8,16 +8,14 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.example.matioyoshitoki.findkids.constraints.Keys;
 import com.example.matioyoshitoki.findkids.socket.MinaClientHandler;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 
 import com.example.matioyoshitoki.findkids.Tools.AllConts;
 import com.example.matioyoshitoki.findkids.Tools.Tools;
@@ -34,20 +32,17 @@ public class TService extends Service {
     private static final String TAG = "TService";
     AMapLocationClient mLocationClient = null;
     private String keyPws = "hslenxjahslenxj)hslenxj@hslenxj!hslenxj,hslenxj/hsle7xja";
-    JSONArray jsa = new JSONArray();
     private int index = 0;
-//    private String buffLati = "";
-//    private String buffLong = "";
-//    private String buffSpeed = "";
-//    private String buffTime = "";
-    private String buffKeys = "";
-    private String buffValues = "";
+
+    private JSONArray data = new JSONArray();
+    private String phone_num;
 //    SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
 
 //    private NotificationManager notificationManager;
 
-    public TService(){
+    public TService(String phone_num){
         Log.i("初始化","哈哈哈");
+        this.phone_num = phone_num;
     }
 //    private Runnable mTasks = new Runnable() {
 //        public void run() {
@@ -75,59 +70,32 @@ public class TService extends Service {
         AMapLocationListener mLocationListener = new AMapLocationListener() {
             @Override
             public void onLocationChanged(AMapLocation aMapLocation) {
+                String lat = ""+aMapLocation.getLatitude();
+                String lo = ""+aMapLocation.getLongitude();
+                String spd = ""+aMapLocation.getSpeed();
+                String time = Tools.getNowDateString("YYYYMMddHHmmss");
+                JSONObject tmp = new JSONObject();
+
+                tmp.put(Keys.LAT,lat);
+                tmp.put(Keys.LONG,lo);
+                tmp.put(Keys.TIME,time);
+                tmp.put(Keys.SPEED,spd);
+
+                data.add(tmp);
                 if (index < 10) {
-//                    Log.i("蓄力中",""+index);
-
-
-
-                    String lat = ""+aMapLocation.getLatitude();
-                    String lo = ""+aMapLocation.getLongitude();
-                    String spd = ""+aMapLocation.getSpeed();
-                    buffKeys = "18969899383"+"0"+"20160227124621";//Tools.getNowDateString("YYYYMMddHHmmss")
-                    Log.i("keys==========>",""+buffKeys);
-                    buffValues = lat+"|"+lo+"|"+spd;
-
-                    JSONObject jsb = new JSONObject();
-                    try {
-                        jsb.put(buffKeys,buffValues);
-                        Log.i("数据", jsb.toString() + "");
-                        jsa.add(jsb.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-
-                    Log.i("序列号", index + ":"+jsb.toString());
+                    Log.i("序列号", index + ":"+tmp.toString());
                     index++;
                 }else {
-                    buffKeys = "18969899383"+"0"+"20160227124621";
-                    buffValues = aMapLocation.getLatitude()+"|"+aMapLocation.getLongitude()+"|"+aMapLocation.getSpeed();
-                    JSONObject js = new JSONObject();
-                    try {
-                        js.put(buffKeys,buffValues);
-                        jsa.add(js.toString());
-                        Log.i("数据", js.toString() + "");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
 
+                    JSONObject result = new JSONObject();
 
-                    JSONObject jsb = new JSONObject();
-                    try {
-                        jsb.put(AllConts.KEYTYPE,AllConts.TYPESENDDAN);
-                        jsb.put(AllConts.KEYCODE,Tools.calCC(jsa.toString()));
-                        jsb.put(AllConts.KEYCONTENT,jsa.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    Log.i("数据处理完毕",""+jsb.toString());
-                    MinaClientHandler.localBuff = jsb.toString();//new String(Tools.encrypt(jsb.toString().getBytes(),keyPws));
+                    result.put(Keys.TYPE,AllConts.TYPESENDLOCATION);
+                    result.put(Keys.DATA,data);
+                    result.put(Keys.PHONENUMBER, phone_num);
 
+                    MinaClientHandler.localBuff = result.toString();//new String(Tools.encrypt(jsb.toString().getBytes(),keyPws));
+                    data = new JSONArray();
                     index = 0;
-                    buffKeys = "";
-                    buffValues = "";
                 }
             }
         };

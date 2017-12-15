@@ -185,6 +185,7 @@ public class AccountController {
                 User_authority user_authority = user_authorityMapper.selectByPrimaryKey(user_session.getUserId());
 
                 result = JsonUtil.fromErrors(Errors.SUCCESS);
+                result.put(Keys.PHONENUM,user.getPhoneNumber());
                 result.put(Keys.USERNAME, user.getUserName());
                 result.put(Keys.USERICON, user.getUserIcon());
                 result.put(Keys.USERAUTHORITY, user_authority.getUserAuthority());

@@ -1,9 +1,16 @@
 package com.example.matioyoshitoki.findkids.socket;
 
+import android.os.Message;
 import android.util.Log;
+
+import com.alibaba.fastjson.JSONObject;
+import com.example.matioyoshitoki.findkids.Tools.AllConts;
+import com.example.matioyoshitoki.findkids.Tools.All_Handle;
+import com.example.matioyoshitoki.findkids.constraints.Keys;
 
 import org.apache.mina.core.service.IoHandlerAdapter;
 import org.apache.mina.core.session.IoSession;
+
 
 /**
  * Created by matioyoshitoki on 17/2/23.
@@ -11,6 +18,11 @@ import org.apache.mina.core.session.IoSession;
 public class MinaClientHandler extends IoHandlerAdapter {
 
     public static String localBuff = "";
+    private String phone_num ;
+
+    public MinaClientHandler(String phone_num){
+        this.phone_num = phone_num;
+    }
 
     // 当客户端连接进入时
     @Override
@@ -23,8 +35,11 @@ public class MinaClientHandler extends IoHandlerAdapter {
                 session.write(localBuff);
                 localBuff = "";
             }else{
-                Log.i("发送数据","TEST BOOM BOOM BOOM");
-                session.write("TEST BOOM BOOM BOOM");
+                JSONObject tmp = new JSONObject();
+                tmp.put(Keys.TYPE, AllConts.TYPEBREATH);
+                tmp.put(Keys.PHONENUMBER, phone_num);
+//                Log.i("发送数据","TEST BOOM BOOM BOOM");
+                session.write(tmp.toString());
             }
             Thread.sleep(10*1000);
         }
@@ -39,9 +54,16 @@ public class MinaClientHandler extends IoHandlerAdapter {
 
     // 当客户端发送消息到达时
     @Override
-    public void messageReceived(IoSession session, Object message)
-            throws Exception {
-
+    public void messageReceived(IoSession session, Object message){
+        JSONObject response = JSONObject.parseObject(message.toString());
+        if (response.getString(Keys.TYPE).equals(AllConts.TYPEBREATH)){
+            if (response.getJSONArray(Keys.DATA).size() != 0){
+                Message msg = new Message();
+                msg.what = 0;
+                msg.obj = response;
+                All_Handle.send_location.sendMessage(msg);
+            }
+        }
         System.out.println("服务器返回的数据：" + message.toString());
     }
 
