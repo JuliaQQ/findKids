@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/classes-c3c49c539df326ae937ce6f71a02c2ec7a8185f5.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-2fafa1dfe4e825c464619ff4b13d60f398639455.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/classes-91a03143f9d6d9242cce230651a616b5af95eebc.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-f0c8ac09a4cfc19cd0921120113fc3fac7db445e.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/classes-fed12e012ca0c9c9dffab05a753ac401b60c1617.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/libs/mina-core-2.0.13.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fb85caac8ad0ac02355663a83722b97a3294f57">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/mina-core-2.0.13-eba3153cdd0f0c10356152c794b139f1162efd2f.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/libs/AMap2DMap_4.2.0_AMapLocation_3.3.0_20170120.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aaa8c525a22beca4d7af07c8f79ae852cd6995f6">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/AMap2DMap_4.2.0_AMapLocation_3.3.0_20170120-fb265ff37f708ea904044a9e9688def59d9975c5.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/libs/slf4j-api-1.7.14.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="862a5bc736005d68727d1387844d09d62efdb6cb">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/slf4j-api-1.7.14-1213caa90ac15abb1ea39057c6822b1936b90421.jar" />
+    </item>
+    <item
+        jar="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/libs/fastjson-1.2.4.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="fbcf8415e32859b473b336e5ac6422ee69b1185b">
+        <dex dex="/Users/matioyoshitoki/Documents/FindKids/FindKids/app/build/intermediates/pre-dexed/debug/fastjson-1.2.4-3212da20ae095daed6812e67b188ff87dfdca647.jar" />
+    </item>
+
+</items>

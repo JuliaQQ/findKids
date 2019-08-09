@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.matio.mapping.Event_influenceMapper" >
+  <resultMap id="BaseResultMap" type="com.matio.pojo.Event_influence" >
+    <result column="event_id" property="eventId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.matio.pojo.Event_influence" extends="BaseResultMap" >
+    <result column="before_change" property="beforeChange" jdbcType="LONGVARCHAR" />
+    <result column="after_change" property="afterChange" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    before_change, after_change
+  </sql>
+  <insert id="insert" parameterType="com.matio.pojo.Event_influence" >
+    insert into event_influence (event_id, before_change, after_change
+      )
+    values (#{eventId,jdbcType=INTEGER}, #{beforeChange,jdbcType=LONGVARCHAR}, #{afterChange,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.matio.pojo.Event_influence" >
+    insert into event_influence
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        event_id,
+      </if>
+      <if test="beforeChange != null" >
+        before_change,
+      </if>
+      <if test="afterChange != null" >
+        after_change,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="beforeChange != null" >
+        #{beforeChange,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="afterChange != null" >
+        #{afterChange,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
